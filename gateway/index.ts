@@ -57,8 +57,8 @@ import { ApolloGateway, RemoteGraphQLDataSource } from "@apollo/gateway";
 import * as fs from 'fs';
 import * as https from 'https';
 import * as http from 'http';
-import * as dotenv from "dotenv"
-dotenv.config()
+//import * as dotenv from "dotenv"
+//dotenv.config()
 
 
 async function startApolloServer() {
@@ -120,8 +120,8 @@ async function startApolloServer() {
     // Make sure these files are secured.
     httpServer = https.createServer(
       {
-        key: fs.readFileSync(`./ssl/server_key.pem`),//キー
-        cert: fs.readFileSync(`./ssl/server_crt.pem`)//証明書
+        key: fs.readFileSync(`./ssl/server.key`),//キー
+        cert: fs.readFileSync(`./ssl/server.crt`)//証明書
       },
       app,
     );
