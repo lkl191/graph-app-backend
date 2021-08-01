@@ -57,8 +57,8 @@ import { ApolloGateway, RemoteGraphQLDataSource } from "@apollo/gateway";
 import * as fs from 'fs';
 import * as https from 'https';
 import * as http from 'http';
-//import * as dotenv from "dotenv"
-//dotenv.config()
+import * as dotenv from "dotenv"
+dotenv.config()
 
 
 async function startApolloServer() {
