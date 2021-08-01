@@ -13,7 +13,7 @@ module.exports = {
       }
     },
   },
-  /*
+  
   Mutation: {
     async SignIn(_: any, { inputUser: { email } }: any, context: any) {
       await admin
@@ -65,13 +65,14 @@ module.exports = {
         .catch(() => console.log("error"));
     },
   },
-  */
+  /*
   User: {
     __resolveReference(user: any) {
       //参照される関数に入る引数が返される
       return User.find((u) => u.id === user.id);
     },
   },
+  */
   //Graphにuserを追加する
   Graph: {
     user(props: any) {
