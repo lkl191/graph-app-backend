@@ -64,7 +64,7 @@ dotenv.config()
 async function startApolloServer() {
   const configurations: any = {
     // Note: You may need sudo to run on port 443
-    production: { ssl: true, port: 443, hostname: 'example.com' },
+    production: { ssl: true, port: 4443, hostname: 'genbu.shishin.nara.jp' },
     development: { ssl: false, port: 4000, hostname: 'localhost' },
   };
 
