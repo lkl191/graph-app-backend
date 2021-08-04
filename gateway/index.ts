@@ -71,9 +71,12 @@ async function startApolloServer() {
   const environment = process.env.NODE_ENV || 'production';
   const config = configurations[environment];
 
+  const isSSL = "http"
+  if(environment == 'production') isSSL.concat("s")
+
   const servises = [
-    { name: "graph", url: "http://localhost:4001" },
-    { name: "user", url: "http://localhost:4002" },
+    { name: "graph", url: isSSL + "://localhost:4001/graphql" },
+    { name: "user", url: isSSL + "://localhost:4002/graphql" },
   ];
 
   const gateway = new ApolloGateway({
@@ -120,8 +123,10 @@ async function startApolloServer() {
     // Make sure these files are secured.
     httpServer = https.createServer(
       {
-        key: fs.readFileSync(`./ssl/server.key`),//キー
-        cert: fs.readFileSync(`./ssl/server.crt`)//証明書
+        //key: fs.readFileSync(`./ssl/server.key`),//キー
+        //cert: fs.readFileSync(`./ssl/server.crt`)//証明書
+        key: fs.readFileSync('/etc/letsencrypt/live/genbu.shishin.nara.jp/privkey.pem'),
+        cert: fs.readFileSync('/etc/letsencrypt/live/genbu.shishin.nara.jp/fullchain.pem')
       },
       app,
     );

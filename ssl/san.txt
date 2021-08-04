@@ -1,1 +1,0 @@
-subjectAltName = DNS:genbu.shishin.nara.jp
