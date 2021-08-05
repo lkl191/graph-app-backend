@@ -50,11 +50,11 @@ module.exports = {
       context: any
     ) {
       let data: any = [];
-
+      
       for (let i = 0; i < label.length; i++) {
         data[i] = { label: label[i], value: value[i] };
       }
-      console.log(data);
+      console.log(context.AuthContext)
       await admin
         .auth()
         .verifyIdToken(context.AuthContext)

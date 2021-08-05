@@ -1,7 +1,6 @@
 import { ApolloServer } from "apollo-server-express";
 import { buildFederatedSchema } from "@apollo/federation";
 import * as mongoose from "mongoose";
-import { ApolloServerPluginInlineTrace, ApolloServerPluginInlineTraceDisabled } from "apollo-server-core/dist/plugin/inlineTrace";
 import * as dotenv from "dotenv";
 dotenv.config();
 
