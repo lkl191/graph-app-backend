@@ -35,8 +35,6 @@ async function startApolloServer() {
     context: ({ req }) => ({
       AuthContext: req.headers.authorization,
     }),
-    //plugins: [ApolloServerPluginInlineTraceDisabled]
-    //plugins: [ApolloServerPluginInlineTrace()],
   });
 
   let httpServer: any;

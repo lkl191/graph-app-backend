@@ -71,12 +71,8 @@ async function startApolloServer() {
   // Create the HTTPS or HTTP server, per configuration
   let httpServer: any;
   if (config.ssl) {
-    // Assumes certificates are in a .ssl folder off of the package root.
-    // Make sure these files are secured.
     httpServer = https.createServer(
       {
-        //key: fs.readFileSync(`./ssl/server.key`),//キー
-        //cert: fs.readFileSync(`./ssl/server.crt`)//証明書
         key: fs.readFileSync(
           "/etc/letsencrypt/live/genbu.shishin.nara.jp/privkey.pem"
         ),
