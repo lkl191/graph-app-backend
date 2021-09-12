@@ -1,5 +1,6 @@
 import Graph from "../models";
 import admin from "../../Firebase-admin/admin";
+import { Context, InputGraphType } from "../../types/graph_types";
 
 module.exports = {
   Query: {
@@ -10,7 +11,7 @@ module.exports = {
         //console.log(uid)
         const graphs = await Graph.find();
         return graphs;
-      } catch (err) {
+      } catch (err: any) {
         console.log(err.message);
       }
     },
@@ -19,7 +20,7 @@ module.exports = {
       try {
         const graph = Graph.findById(graphId);
         return graph;
-      } catch (err) {
+      } catch (err: any) {
         console.log(err.message);
       }
     },
@@ -34,11 +35,10 @@ module.exports = {
       return await graphs;
     },
     async graphCate(_: any, { category }: any, context: any) {
-      console.log(category);
       try {
         const graphs = Graph.find({ category: category });
         return graphs;
-      } catch (err) {
+      } catch (err: any) {
         console.log(err.message);
       }
     },
@@ -46,15 +46,14 @@ module.exports = {
   Mutation: {
     async createGraph(
       _: any,
-      { inputGraph: { title, category, graphKind, label, value } }: any,
-      context: any
+      { inputGraph: { title, category, graphKind, source, label, value } }: InputGraphType,
+      context: Context
     ) {
       let data: any = [];
-      
+
       for (let i = 0; i < label.length; i++) {
         data[i] = { label: label[i], value: value[i] };
       }
-      console.log(context.AuthContext)
       await admin
         .auth()
         .verifyIdToken(context.AuthContext)
@@ -65,6 +64,7 @@ module.exports = {
             title,
             category,
             graphKind,
+            source,
             userId,
             data,
           });
@@ -72,15 +72,17 @@ module.exports = {
           return graph;
         });
     },
-    async deleteGraph(_: any, { inputDeleteGraph: { id } }: any, context: any) {
+    async deleteGraph(
+      _: any,
+      { inputDeleteGraph: { id } }: any,
+      context: Context
+    ) {
       //const user = await checkAuth(context.AuthContext);
-      console.log("object");
       try {
         const graph = await Graph.findById(id);
         await graph.delete();
-        console.log(graph);
         return "graph is deleted";
-      } catch (err) {
+      } catch (err: any) {
         console.log(err.message);
       }
     },
@@ -97,9 +99,4 @@ module.exports = {
       return graph;
     },
   },
-  //Graph: {
-  //  __resolveReference(graph: any) {
-  //    return Graph.find((e: any) => e.id === graph);
-  //  }
-  //},
 };

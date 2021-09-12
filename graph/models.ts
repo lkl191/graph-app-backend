@@ -5,6 +5,7 @@ const graphSchema = new Schema({
   category: String,
   graphKind: { type: String, enum: ["LINE", "BAR", "PIE", "RADAR", "SCATTER"] },
   userId: String,
+  source: [String],
   data: [
     {
       label: String,

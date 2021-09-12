@@ -5,7 +5,8 @@ module.exports = gql`
     id: ID!
     title: String!
     category: String!
-    graphKind: GraphKind
+    graphKind: GraphKind!
+    source: [String]
     userId: String
     data: [Data]
   }
@@ -24,7 +25,8 @@ module.exports = gql`
   input InputGraph {
     title: String!
     category: String!
-    graphKind: GraphKind
+    graphKind: GraphKind!
+    source: [String]
     label: [String]
     value: [Int]
   }
