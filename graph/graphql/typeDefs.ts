@@ -6,14 +6,14 @@ module.exports = gql`
     title: String!
     category: String!
     graphKind: GraphKind!
-    source: [String]
+    source: String
     userId: String
     data: [Data]
   }
   type Data {
     id: ID!
     label: String,
-    value: Int
+    value: Float
   }
   enum GraphKind {
     LINE
@@ -26,9 +26,9 @@ module.exports = gql`
     title: String!
     category: String!
     graphKind: GraphKind!
-    source: [String]
+    source: String
     label: [String]
-    value: [Int]
+    value: [Float]
   }
   input InputDeleteGraph {
     id: ID!
