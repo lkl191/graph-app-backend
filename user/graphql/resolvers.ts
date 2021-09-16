@@ -8,7 +8,7 @@ module.exports = {
       try {
         const users = await User.find();
         return users;
-      } catch (err) {
+      } catch (err: any) {
         console.log(err.message);
       }
     },
@@ -29,7 +29,7 @@ module.exports = {
           }
           try {
             return null; //user;
-          } catch (err) {
+          } catch (err: any) {
             console.log(err.message);
           }
         })
@@ -58,7 +58,7 @@ module.exports = {
             });
             const user = newUser.save();
             return null; //user;
-          } catch (err) {
+          } catch (err: any) {
             console.log(err.message);
           }
         })

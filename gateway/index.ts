@@ -28,6 +28,7 @@ async function startApolloServer() {
   const servises = [
     { name: "graph", url: isSSL + "://" + host + ":4001/graphql" },
     { name: "user", url: isSSL + "://" + host + ":4002/graphql" },
+    { name: "blendGraph", url: isSSL + "://" + host + ":4003/graphql" },
   ];
 
   const gateway = new ApolloGateway({

@@ -15,7 +15,7 @@ const resolvers = require("./graphql/resolvers");
 
 //MongoDB
 let MONGODB: any = process.env.MONGODB_URI;
-let port = process.env.PORT || 4001;
+let port = process.env.PORT || 4003;
 
 async function startApolloServer() {
   const configurations: any = {

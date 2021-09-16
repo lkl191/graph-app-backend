@@ -6,16 +6,13 @@ module.exports = {
   Query: {
     async allGraphs() {
       try {
-        //console.log(context.AuthContext)
-        //const uid = checkAuth(context.AuthContext)
-        //console.log(uid)
         const graphs = await Graph.find();
         return graphs;
       } catch (err: any) {
         console.log(err.message);
       }
     },
-    async singleGraph(_: any, { graphId }: any, context: String) {
+    async singleGraph(_: any, { graphId }: any) {
       //console.log(typeof(graphId))
       try {
         const graph = Graph.findById(graphId);
@@ -60,7 +57,7 @@ module.exports = {
         .then((user) => {
           const userId = user.uid;
 
-          let newGraph = new Graph({
+          const newGraph = new Graph({
             title,
             category,
             graphKind,
@@ -99,4 +96,14 @@ module.exports = {
       return graph;
     },
   },
+  BlendGraph: {
+    graphs(props: any) {
+      let graphs = []
+      for(let i = 0; i < props.graphId.length; i++) {
+        const graph = Graph.findById(props.graphId[i])
+        graphs.push(graph)
+      }
+      return graphs
+    }
+  }
 };

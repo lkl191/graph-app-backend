@@ -7,6 +7,7 @@
     "start-gateway": "npx ts-node-dev gateway/index.ts",
     "start-service-graph": "npx ts-node-dev graph/index.ts",
     "start-service-user": "npx ts-node-dev user/index.ts",
+    "start-service-blendGraph": "npx ts-node-dev blendGraph/index.ts",
     "start-services": "concurrently \"yarn:start-service-*\"",
     "start": "yarn start-services && yarn start-gateway"
   },

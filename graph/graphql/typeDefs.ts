@@ -47,4 +47,9 @@ module.exports = gql`
     _id: String @external
     graphs: [Graph]
   }
+
+  extend type BlendGraph @key(fields: "graphId") {
+    graphId: [String] @external
+    graphs: [Graph]
+  }
 `;
