@@ -13,17 +13,25 @@ module.exports = {
         console.log(err.message);
       }
     },
-    async singleBlendGraph(
-      _: any,
-      {id}: any
-    ) {
+    async singleBlendGraph(_: any, { id }: any) {
       try {
-        const blendGraph = BlendGraph.findById(id)
-        return blendGraph
+        const blendGraph = BlendGraph.findById(id);
+        return blendGraph;
       } catch (err) {
-        console.log(err.message)
+        console.log(err.message);
       }
-    }
+    },
+    async myBlendGraphs(_: any, { userId }: any, context: Context) {
+      let blendGraphs;
+      await admin
+        .auth()
+        .verifyIdToken(context.AuthContext)
+        .then(async (user) => {
+          console.log(user.uid)
+          blendGraphs = await BlendGraph.find({ userId: user.uid });
+        });
+      return await blendGraphs;
+    },
   },
   Mutation: {
     async createBlendGraph(

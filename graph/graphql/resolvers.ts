@@ -21,7 +21,7 @@ module.exports = {
         console.log(err.message);
       }
     },
-    async myGraphs(_: any, { userId }: any, context: any) {
+    async myGraphs(_: any, { userId }: any, context: Context) {
       let graphs;
       await admin
         .auth()
