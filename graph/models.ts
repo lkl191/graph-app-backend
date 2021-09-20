@@ -6,6 +6,7 @@ const graphSchema = new Schema({
   graphKind: { type: String, enum: ["LINE", "BAR", "PIE", "RADAR", "SCATTER"] },
   userId: String,
   source: String,
+  color: String,
   data: [
     {
       label: String,

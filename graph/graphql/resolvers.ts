@@ -43,7 +43,7 @@ module.exports = {
   Mutation: {
     async createGraph(
       _: any,
-      { inputGraph: { title, category, graphKind, source, label, value } }: InputGraphType,
+      { inputGraph: { title, category, graphKind, source, label, value, color } }: InputGraphType,
       context: Context
     ) {
       let data: any = [];
@@ -64,6 +64,7 @@ module.exports = {
             source,
             userId,
             data,
+            color
           });
           const graph = newGraph.save();
           return graph;

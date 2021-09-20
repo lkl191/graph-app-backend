@@ -9,6 +9,7 @@ module.exports = gql`
     source: String
     userId: String
     data: [Data]
+    color: String
   }
   type Data {
     id: ID!
@@ -29,6 +30,7 @@ module.exports = gql`
     source: String
     label: [String]
     value: [Float]
+    color: String
   }
   input InputDeleteGraph {
     id: ID!

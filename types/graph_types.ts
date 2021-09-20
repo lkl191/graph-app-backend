@@ -11,6 +11,7 @@ type GraphType = {
     source: [string],
     label: [string],
     value: [string],
+    color: string,
 }
 
 export type InputGraphType = {
