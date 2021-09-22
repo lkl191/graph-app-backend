@@ -52,7 +52,7 @@ module.exports = {
     async createGraph(
       _: any,
       {
-        inputGraph: { title, category, graphKind, source, label, value, color },
+        inputGraph: { title, category, graphKind, source, label, value, color, description },
       }: InputGraphType,
       context: Context
     ) {
@@ -75,6 +75,7 @@ module.exports = {
             userId,
             data,
             color,
+            description
           });
           const graph = newGraph.save();
           return graph;

@@ -21,16 +21,25 @@ module.exports = {
         console.log(err.message);
       }
     },
-    async myBlendGraphs(_: any, { userId }: any, context: Context) {
+    //FEはまだ未実装
+    async myBlendGraphs(_: any, { userId }: any, context: Context) { 
       let blendGraphs;
       await admin
         .auth()
         .verifyIdToken(context.AuthContext)
         .then(async (user) => {
-          console.log(user.uid)
+          console.log(user.uid);
           blendGraphs = await BlendGraph.find({ userId: user.uid });
         });
       return await blendGraphs;
+    },
+    async searchBlendGraphs(_: any, { searchWord }: any) {
+      try {
+        const blendGraphs = BlendGraph.find({ title: { $regex: searchWord } });
+        return blendGraphs;
+      } catch (err) {
+        console.log(err.message);
+      }
     },
   },
   Mutation: {

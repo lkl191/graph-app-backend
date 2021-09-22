@@ -7,6 +7,7 @@ const graphSchema = new Schema({
   userId: String,
   source: String,
   color: String,
+  description: String,
   data: [
     {
       label: String,

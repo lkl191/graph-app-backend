@@ -26,5 +26,6 @@ module.exports = gql`
     allBlendGraphs: [BlendGraph]
     singleBlendGraph(id: ID!): BlendGraph
     myBlendGraphs(userId: String): [BlendGraph]
+    searchBlendGraphs(searchWord: String): [BlendGraph]
   }
 `;
