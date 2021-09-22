@@ -39,11 +39,21 @@ module.exports = {
         console.log(err.message);
       }
     },
+    async searchGraphs(_: any, { searchWord }: any, context: any) {
+      try {
+        const graphs = Graph.find({ title: { $regex: searchWord } });
+        return graphs;
+      } catch (err: any) {
+        console.log(err.message);
+      }
+    },
   },
   Mutation: {
     async createGraph(
       _: any,
-      { inputGraph: { title, category, graphKind, source, label, value, color } }: InputGraphType,
+      {
+        inputGraph: { title, category, graphKind, source, label, value, color },
+      }: InputGraphType,
       context: Context
     ) {
       let data: any = [];
@@ -64,7 +74,7 @@ module.exports = {
             source,
             userId,
             data,
-            color
+            color,
           });
           const graph = newGraph.save();
           return graph;
@@ -99,12 +109,12 @@ module.exports = {
   },
   BlendGraph: {
     graphs(props: any) {
-      let graphs = []
-      for(let i = 0; i < props.graphId.length; i++) {
-        const graph = Graph.findById(props.graphId[i])
-        graphs.push(graph)
+      let graphs = [];
+      for (let i = 0; i < props.graphId.length; i++) {
+        const graph = Graph.findById(props.graphId[i]);
+        graphs.push(graph);
       }
-      return graphs
-    }
-  }
+      return graphs;
+    },
+  },
 };

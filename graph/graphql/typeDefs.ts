@@ -44,6 +44,7 @@ module.exports = gql`
     singleGraph(graphId: ID!): Graph
     myGraphs(userId: String): [Graph]
     graphCate(category: String): [Graph]
+    searchGraphs(searchWord: String): [Graph]
   }
   extend type User @key(fields: "_id") {
     _id: String @external
