@@ -4,7 +4,7 @@ const userSchema = new Schema({
   _id: String,
   username: String,
   password: String,
-  email: String
+  email: String,
 });
 
 const User = model("User", userSchema);

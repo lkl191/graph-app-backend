@@ -1,7 +1,6 @@
 import { ApolloServer } from "apollo-server-express";
 import { buildFederatedSchema } from "@apollo/federation";
 import * as mongoose from "mongoose";
-import { ApolloServerPluginInlineTrace, ApolloServerPluginInlineTraceDisabled } from "apollo-server-core/dist/plugin/inlineTrace";
 import * as dotenv from "dotenv";
 dotenv.config();
 
@@ -27,6 +26,8 @@ async function startApolloServer() {
 
   const environment = process.env.NODE_ENV || "production";
   const config = configurations[environment];
+  const crypt_key = process.env.CRYPT_KEY_PATH || ""
+  const crypt_cert = process.env.CRYPT_CERT_PATH || ""
 
   const server = new ApolloServer({
     schema: buildFederatedSchema({
@@ -50,8 +51,8 @@ async function startApolloServer() {
     if (config.ssl) {
       httpServer = https.createServer(
         {
-          key: fs.readFileSync("/etc/letsencrypt/live/genbu.shishin.nara.jp/privkey.pem"),
-          cert: fs.readFileSync("/etc/letsencrypt/live/genbu.shishin.nara.jp/fullchain.pem"),
+          key: fs.readFileSync(crypt_key),
+          cert: fs.readFileSync(crypt_cert),
         },
         app
       );
@@ -73,8 +74,10 @@ async function startApolloServer() {
     .then(() => {
       new Promise((resolve) => httpServer.listen({ port }, resolve));
       console.log(
-        '🚀 Server ready at',
-        `http${config.ssl ? 's' : ''}://${config.hostname}:${config.port}${server.graphqlPath}`
+        "🚀 Server ready at",
+        `http${config.ssl ? "s" : ""}://${config.hostname}:${config.port}${
+          server.graphqlPath
+        }`
       );
     })
     .catch((err) => {

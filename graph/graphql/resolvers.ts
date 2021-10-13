@@ -26,7 +26,7 @@ module.exports = {
       await admin
         .auth()
         .verifyIdToken(context.AuthContext)
-        .then(async (user) => {
+        .then(async (user: any) => {
           graphs = await Graph.find({ userId: user.uid });
         });
       return await graphs;
@@ -52,7 +52,16 @@ module.exports = {
     async createGraph(
       _: any,
       {
-        inputGraph: { title, category, graphKind, source, label, value, color, description },
+        inputGraph: {
+          title,
+          category,
+          graphKind,
+          source,
+          label,
+          value,
+          color,
+          description,
+        },
       }: InputGraphType,
       context: Context
     ) {
@@ -64,7 +73,7 @@ module.exports = {
       await admin
         .auth()
         .verifyIdToken(context.AuthContext)
-        .then((user) => {
+        .then((user: any) => {
           const userId = user.uid;
 
           const newGraph = new Graph({
@@ -75,7 +84,7 @@ module.exports = {
             userId,
             data,
             color,
-            description
+            description,
           });
           const graph = newGraph.save();
           return graph;

@@ -12,6 +12,8 @@ import * as http from "http";
 //graphql
 const typeDefs = require("./graphql/typeDefs");
 const resolvers = require("./graphql/resolvers");
+const crypt_key = process.env.CRYPT_KEY_PATH || ""
+const crypt_cert = process.env.CRYPT_CERT_PATH || ""
 
 //MongoDB
 let MONGODB: any = process.env.MONGODB_URI;
@@ -19,7 +21,6 @@ let port = process.env.PORT || 4001;
 
 async function startApolloServer() {
   const configurations: any = {
-    // Note: You may need sudo to run on port 443
     production: { ssl: true, port, hostname: "localhost" },
     development: { ssl: false, port, hostname: "localhost" },
   };
@@ -47,12 +48,8 @@ async function startApolloServer() {
     if (config.ssl) {
       httpServer = https.createServer(
         {
-          key: fs.readFileSync(
-            "/etc/letsencrypt/live/genbu.shishin.nara.jp/privkey.pem"
-          ),
-          cert: fs.readFileSync(
-            "/etc/letsencrypt/live/genbu.shishin.nara.jp/fullchain.pem"
-          ),
+          key: fs.readFileSync(crypt_key),
+          cert: fs.readFileSync(crypt_cert),
         },
         app
       );
