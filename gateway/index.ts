@@ -17,8 +17,8 @@ async function startApolloServer() {
 
   const environment = process.env.NODE_ENV || "production";
   const config = configurations[environment];
-  const crypt_key = process.env.CRYPT_KEY_PATH || ""
-  const crypt_cert = process.env.CRYPT_CERT_PATH || ""
+  const crypt_key = process.env.CRYPT_KEY_PATH || "";
+  const crypt_cert = process.env.CRYPT_CERT_PATH || "";
 
   let isSSL = "http";
   let host = "localhost";
@@ -58,6 +58,14 @@ async function startApolloServer() {
 
   const server = new ApolloServer({
     gateway,
+    context: ({ req }) => {
+      const user = req;
+      return { user };
+    },
+  });
+  /*
+  const server = new ApolloServer({
+    gateway,
     //各サブグラフへ
 
     context: ({ req }) => {
@@ -65,6 +73,7 @@ async function startApolloServer() {
       return { user };
     },
   });
+  */
   await server.start();
 
   const app = express();

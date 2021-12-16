@@ -1,6 +1,6 @@
 import { ApolloServer } from "apollo-server-express";
 import { buildFederatedSchema } from "@apollo/federation";
-import * as mongoose from "mongoose";
+import mongoose from "mongoose";
 import * as dotenv from "dotenv";
 dotenv.config();
 
@@ -60,9 +60,9 @@ async function startApolloServer() {
 
   mongoose
     .connect(MONGODB, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
+      //useNewUrlParser: true,
+      //useUnifiedTopology: true,
+      //useCreateIndex: true,
     })
     .then(() => {
       console.log("MongoDB Connected");

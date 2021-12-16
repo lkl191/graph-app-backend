@@ -9,7 +9,7 @@ module.exports = {
       try {
         const blendGraphs = await BlendGraph.find();
         return blendGraphs;
-      } catch (err) {
+      } catch (err: any) {
         console.log(err.message);
       }
     },
@@ -17,7 +17,7 @@ module.exports = {
       try {
         const blendGraph = BlendGraph.findById(id);
         return blendGraph;
-      } catch (err) {
+      } catch (err: any) {
         console.log(err.message);
       }
     },
@@ -37,7 +37,7 @@ module.exports = {
       try {
         const blendGraphs = BlendGraph.find({ title: { $regex: searchWord } });
         return blendGraphs;
-      } catch (err) {
+      } catch (err: any) {
         console.log(err.message);
       }
     },
@@ -63,7 +63,7 @@ module.exports = {
             const blendGraph = newBlendGraph.save();
             return blendGraph;
           });
-      } catch (err) {
+      } catch (err: any) {
         console.log(err.message);
       }
     },
@@ -72,7 +72,7 @@ module.exports = {
         const blendGraph = await BlendGraph.findById(id);
         await blendGraph.delete();
         return "blendGraph is deleted";
-      } catch (err) {
+      } catch (err: any) {
         console.log(err.message);
       }
     },

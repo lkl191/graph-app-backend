@@ -1,6 +1,6 @@
 import { ApolloServer } from "apollo-server-express";
 import { buildFederatedSchema } from "@apollo/federation";
-import * as mongoose from "mongoose";
+import mongoose from "mongoose";
 import * as dotenv from "dotenv";
 dotenv.config();
 
@@ -42,12 +42,12 @@ async function startApolloServer() {
   });
 
   let httpServer: any;
-
+  
   const serverStart = async () => {
     await server.start();
     const app = express();
     server.applyMiddleware({ app });
-
+    
     if (config.ssl) {
       httpServer = https.createServer(
         {
@@ -59,13 +59,14 @@ async function startApolloServer() {
     } else {
       httpServer = http.createServer(app);
     }
+    
   };
 
   mongoose
     .connect(MONGODB, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
+      //useNewUrlParser: true,
+      //useUnifiedTopology: true,
+      //useCreateIndex: true,
     })
     .then(() => {
       console.log("MongoDB Connected");
@@ -86,7 +87,3 @@ async function startApolloServer() {
 }
 
 startApolloServer();
-
-//server.listen(4001).then(({ url }: URL) => {
-//    console.log(`Server has running on ${url}`)
-//})
