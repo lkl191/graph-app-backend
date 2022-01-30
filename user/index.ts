@@ -5,8 +5,8 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 const express = require("express");
-import * as fs from "fs";
-import * as https from "https";
+// import * as fs from "fs";
+// import * as https from "https";
 import * as http from "http";
 
 //graphql
@@ -14,7 +14,7 @@ const typeDefs = require("./graphql/typeDefs");
 const resolvers = require("./graphql/resolvers");
 
 //MongoDB
-let MONGODB: any = process.env.MONGODB_URI;
+let MONGODB = process.env.MONGODB_URI;
 let port = process.env.PORT || 4002;
 
 async function startApolloServer() {
@@ -26,8 +26,8 @@ async function startApolloServer() {
 
   const environment = process.env.NODE_ENV || "production";
   const config = configurations[environment];
-  const crypt_key = process.env.CRYPT_KEY_PATH || ""
-  const crypt_cert = process.env.CRYPT_CERT_PATH || ""
+  // const crypt_key = process.env.CRYPT_KEY_PATH || ""
+  // const crypt_cert = process.env.CRYPT_CERT_PATH || ""
 
   const server = new ApolloServer({
     schema: buildFederatedSchema({
@@ -42,29 +42,33 @@ async function startApolloServer() {
   });
 
   let httpServer: any;
-  
+
   const serverStart = async () => {
     await server.start();
     const app = express();
     server.applyMiddleware({ app });
-    
-    if (config.ssl) {
-      httpServer = https.createServer(
-        {
-          key: fs.readFileSync(crypt_key),
-          cert: fs.readFileSync(crypt_cert),
-        },
-        app
-      );
-    } else {
-      httpServer = http.createServer(app);
-    }
-    
+    httpServer = http.createServer(app);
+
+    // if (config.ssl) {
+    //   httpServer = https.createServer(
+    //     {
+    //       key: fs.readFileSync(crypt_key),
+    //       cert: fs.readFileSync(crypt_cert),
+    //     },
+    //     app
+    //   );
+    // } else {
+    //   httpServer = http.createServer(app);
+    // }
   };
+
+  if (!MONGODB) {
+    return console.log("not found MongoDB URI");
+  }
 
   mongoose
     .connect(MONGODB, {
-      //useNewUrlParser: true,
+      useNewUrlParser: true,
       //useUnifiedTopology: true,
       //useCreateIndex: true,
     })

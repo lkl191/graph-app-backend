@@ -1,5 +1,5 @@
 import User from "../models";
-import admin from "../../Firebase-admin/admin";
+import admin from "../Firebase-admin/admin";
 
 module.exports = {
   Query: {

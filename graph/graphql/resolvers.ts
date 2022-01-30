@@ -1,5 +1,5 @@
 import Graph from "../models";
-import admin from "../../Firebase-admin/admin";
+import admin from "../Firebase-admin/admin";
 import { Context, InputGraphType } from "../../types/graph_types";
 
 module.exports = {

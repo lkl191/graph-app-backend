@@ -2,8 +2,8 @@
 const express = require("express");
 import { ApolloServer } from "apollo-server-express";
 import { ApolloGateway, RemoteGraphQLDataSource } from "@apollo/gateway";
-import * as fs from "fs";
-import * as https from "https";
+// import * as fs from "fs";
+// import * as https from "https";
 import * as http from "http";
 import * as dotenv from "dotenv";
 dotenv.config();
@@ -17,15 +17,15 @@ async function startApolloServer() {
 
   const environment = process.env.NODE_ENV || "production";
   const config = configurations[environment];
-  const crypt_key = process.env.CRYPT_KEY_PATH || "";
-  const crypt_cert = process.env.CRYPT_CERT_PATH || "";
+  // const crypt_key = process.env.CRYPT_KEY_PATH || "";
+  // const crypt_cert = process.env.CRYPT_CERT_PATH || "";
 
   let isSSL = "http";
   let host = "localhost";
-  if (environment == "production") {
-    isSSL = "https";
-    host = "genbu.shishin.nara.jp";
-  }
+  // if (environment == "production") {
+  //   isSSL = "https";
+  //   host = "genbu.shishin.nara.jp";
+  // }
 
   const servises = [
     { name: "graph", url: isSSL + "://" + host + ":4001/graphql" },
@@ -81,17 +81,18 @@ async function startApolloServer() {
 
   // Create the HTTPS or HTTP server, per configuration
   let httpServer: any;
-  if (config.ssl) {
-    httpServer = https.createServer(
-      {
-        key: fs.readFileSync(crypt_key),
-        cert: fs.readFileSync(crypt_cert),
-      },
-      app
-    );
-  } else {
-    httpServer = http.createServer(app);
-  }
+  httpServer = http.createServer(app);
+  // if (config.ssl) {
+  //   httpServer = https.createServer(
+  //     {
+  //       key: fs.readFileSync(crypt_key),
+  //       cert: fs.readFileSync(crypt_cert),
+  //     },
+  //     app
+  //   );
+  // } else {
+  //   httpServer = http.createServer(app);
+  // }
 
   await new Promise((resolve) =>
     httpServer.listen({ port: config.port }, resolve)

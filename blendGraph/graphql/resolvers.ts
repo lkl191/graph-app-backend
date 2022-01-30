@@ -1,6 +1,6 @@
 import { Context } from "../../types/graph_types";
 import { InputBlendGraphType } from "../../types/blendGraph_types";
-import admin from "../../Firebase-admin/admin";
+import admin from "../Firebase-admin/admin";
 import BlendGraph from "../models";
 
 module.exports = {
