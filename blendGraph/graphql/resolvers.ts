@@ -1,5 +1,5 @@
-import { Context } from "../../types/graph_types";
-import { InputBlendGraphType } from "../../types/blendGraph_types";
+
+import { InputBlendGraphType, Context } from "../types";
 import admin from "../Firebase-admin/admin";
 import BlendGraph from "../models";
 

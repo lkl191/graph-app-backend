@@ -68,7 +68,7 @@ async function startApolloServer() {
 
   mongoose
     .connect(MONGODB, {
-      useNewUrlParser: true,
+      // useNewUrlParser: true,
       //useUnifiedTopology: true,
       //useCreateIndex: true,
     })
