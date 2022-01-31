@@ -14,6 +14,7 @@ yarn-error.log
 
 # production
 /build
+deploy-heroku.sh
 
 # misc
 .DS_Store
