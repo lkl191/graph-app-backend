@@ -108,20 +108,20 @@ module.exports = {
   //UserにGraphsを追加する
   User: {
     //userのIDが引数に入る
-    graphs(props: any) {
+    async graphs(props: any) {
       //console.log(graph)//ユーザIDは特定済み
       //これとGraphのuserIdを一致させたものを抽出したい
-      const graph = Graph.find({ userId: props._id });
+      const graph = await Graph.find({ userId: props._id });
       //console.log(graph)
       //このgraphが格納されるのは[Graph]
       return graph;
     },
   },
   BlendGraph: {
-    graphs(props: any) {
+    async graphs(props: any) {
       let graphs = [];
       for (let i = 0; i < props.graphId.length; i++) {
-        const graph = Graph.findById(props.graphId[i]);
+        const graph = await Graph.findById(props.graphId[i]);
         graphs.push(graph);
       }
       return graphs;

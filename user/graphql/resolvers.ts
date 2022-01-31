@@ -6,7 +6,7 @@ module.exports = {
     //contextを使うには{}を引数に必要
     async allUsers(_: any, {}) {
       try {
-        const users = await User.find();
+        const users = await User.find()
         return users;
       } catch (err: any) {
         console.log(err.message);
@@ -75,8 +75,8 @@ module.exports = {
   */
   //Graphにuserを追加する
   Graph: {
-    user(props: any) {
-      const user = User.findById(props.userId);
+    async user(props: any) {
+      const user = await User.findById(props.userId)
       return user;
     },
   },

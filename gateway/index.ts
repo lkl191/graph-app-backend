@@ -8,7 +8,7 @@ import * as http from "http";
 import * as dotenv from "dotenv";
 dotenv.config();
 
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || 4000;
 
 async function startApolloServer() {
   const configurations: any = {
@@ -29,15 +29,21 @@ async function startApolloServer() {
   //   host = "genbu.shishin.nara.jp";
   // }
 
-  const GRAPH_URL = "https://graph-app-micro-graph.herokuapp.com/graphql"
-  const USER_URL = "https://graph-app-micro-user.herokuapp.com/graphql"
-  const BLEND_GRAPH_URL = "https://graph-app-micro-blend-graph.herokuapp.com/graphql"
+  const GRAPH_URL = process.env.mode
+    ? "http://localhost:4001/graphql"
+    : "https://graph-app-micro-graph.herokuapp.com/graphql";
+  const USER_URL = process.env.mode
+    ? "http://localhost:4002/graphql"
+    : "https://graph-app-micro-user.herokuapp.com/graphql";
+  const BLEND_GRAPH_URL = process.env.mode
+    ? "http://localhost:4003/graphql"
+    : "https://graph-app-micro-blend-graph.herokuapp.com/graphql";
 
   const services = [
-    {name: "graph", url: GRAPH_URL},
-    {name: "user", url: USER_URL},
-    {name: "blendGraph", url: BLEND_GRAPH_URL},
-  ]
+    { name: "graph", url: GRAPH_URL },
+    { name: "user", url: USER_URL },
+    { name: "blendGraph", url: BLEND_GRAPH_URL },
+  ];
 
   // const services = [
   //   { name: "graph", url: isSSL + "://" + host + ":4001/graphql" },

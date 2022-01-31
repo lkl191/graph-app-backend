@@ -32,7 +32,6 @@ async function startApolloServer() {
     schema: buildFederatedSchema({
       typeDefs,
       resolvers,
-      
     }),
     context: ({ req }) => ({
       AuthContext: req.headers.authorization,
@@ -47,7 +46,7 @@ async function startApolloServer() {
     server.applyMiddleware({ app });
     httpServer = http.createServer(app);
   };
-  if(!MONGODB) {
+  if (!MONGODB) {
     return console.log("not found MongoDB URI");
   }
   mongoose
