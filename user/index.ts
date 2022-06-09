@@ -29,7 +29,6 @@ if (!MONGODB) {
   process.exit(1)
 }
 
-
 mongoose
   .connect(MONGODB, {
     // useNewUrlParser: true,
