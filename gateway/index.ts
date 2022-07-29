@@ -50,6 +50,6 @@ const server = new ApolloServer({
   },
 });
 
-server.listen().then((serverInfo) => {
+server.listen({ port: PORT as number }).then((serverInfo) => {
   console.log("🚀 Server ready at", serverInfo.url);
 });
